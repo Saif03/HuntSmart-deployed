@@ -1,0 +1,20 @@
+﻿@{
+   
+
+    List<string> skill = new List<string>();
+    skill = (List<string>)Session["skill"];
+
+}
+
+<p style="color:green">Search Result:</p>
+<script>alert("good")</script>
+@{ if (skill != null)
+    {
+        for (int i = 0; i < skill.Count(); i++)
+        {
+            <div id="dss">
+                <p style="color:black" id="pss">@skill.ElementAt(i)</p>
+            </div>
+        }
+    }
+}

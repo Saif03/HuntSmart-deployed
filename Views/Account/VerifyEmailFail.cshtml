@@ -1,0 +1,41 @@
+﻿@model HuntSmart.Models.EmailVerificationCode
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Hunt Smart - Know before you go";
+}
+<div id="verifyemail">
+    <div id="main-wrapper">
+        <!-- HOME PRO-->
+        <div class="home-pro">
+            <!-- PRO BANNER HEAD -->
+            <div class="banr-head">
+                <div class="container">
+                    <div class="row">
+                        <!-- CONTENT -->
+                        <div>
+                            <div class="text-area">
+                                <div class="position-center-center">
+                                    <h1> You are Just One Step to Go</h1>
+                                    <h3>We have just sent you a code at your email. Please enter the code here to verify your email </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <center><h3 style="color:red">Wrong Verification Code</h3></center>
+                        <form action="/Account/VerifyEmail" method="post" id="form2" name="form2">
+                            <center>
+                                <p id="result"></p>
+                                <input type="text" id="verifyemail" name="verifyemail" placeholder="Verification Code" style="border:double; border-color:dodgerblue; width:40%;height:10%; background-color:black; opacity:0.5; font-size:23px" />
+                                <input name="verifyemailbtn" id="verifyemailbtn" type="submit" value="Verify" style="width:15%; height:40px; background-color:lawngreen; border-radius: 10px;font-size:18px; color:white" />
+                            </center>
+                        </form>
+                        <form action="/Account/resend" method="post" id="form3" name="form3">
+                            <center>
+                                <input name="resendemailbtn" id="resendemailbtn" type="submit" value="Resend Code" style="width:15%; height:40px; background-color:dodgerblue; border-radius: 10px;font-size:18px; color:white" />
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
