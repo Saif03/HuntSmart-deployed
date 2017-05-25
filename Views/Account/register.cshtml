@@ -1,0 +1,111 @@
+﻿@model HuntSmart.Models.User
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Register Account - Hunt Smart";
+}
+
+<div id="main-wrapper">
+
+  <!-- HOME PRO-->
+  <div class="home-pro">
+    <!-- PRO BANNER HEAD -->
+    <div class="banr-head">
+      <div class="container">
+        <div class="row">
+          <!-- CONTENT -->
+          <div class="col-sm-7">
+            <div class="text-area">
+              <div class="position-center-center col-md-10">
+                <h1> Here comes the social networking platform that you’ve been waiting for</h1>
+                <h6>A socail platform for finding jobs which suits your need. </h6>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORM SECTION -->
+          <div class="col-sm-5">
+            <div class="login-sec">
+
+              <!-- TABS -->
+              <div class="uou-tabs">
+                <ul class="tabs">
+                  <li class="active">
+                    <h3>
+                      <a href="#register">Register Now</a>
+                    </h3>
+                  </li>
+                  <!--<li class="active"><a href="#log-in">Member Login</a></li>-->
+                </ul>
+                <!-- REGISTER -->
+                <div class="content">
+                  <div id="register" class="active">
+                    @using (Html.BeginForm("register", "Account", FormMethod.Post, new { @id = "form1" }))
+                    {
+                      @Html.ValidationSummary(true)
+                      @Html.TextBoxFor(model => model.User_FirstName, null, new { @class = "form-control", placeholder = "First Name", id = "firstname", name = "firstname", required = "required" })
+                      <div style="color:red"> @Html.ValidationMessageFor(model => model.User_FirstName)</div>
+
+                      @Html.TextBoxFor(model => model.User_LastName, null, new { @class = "form-control", placeholder = "Last Name", id = "lastname", name = "lastname", required = "required" })
+                      <div style="color:red">@Html.ValidationMessageFor(model => model.User_LastName)</div>
+
+                      @Html.TextBoxFor(model => model.User_Email, null, new { @class = "form-control", type = "email", placeholder = "Email", required = "required" })
+                      <div style="color:red">@Html.ValidationMessageFor(model => model.User_Email)</div>
+                      <p id="result"></p>
+
+                      @Html.PasswordFor(model => model.User_Password, new { @class = "form-control", id = "pass", name = "pass", placeholder = "Password", required = "required" })
+                      <div style="color:red">@Html.ValidationMessageFor(model => model.User_Password)</div>
+                      <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div>
+                          <div style="margin-top:2%" class="col-sm-2"><p style="color:darkgray">Male</p></div>
+                          <div class="col-sm-2">@Html.RadioButtonFor(model => model.User_Gender, "male", new { @name = "gender" }) </div>
+                        </div>
+                        <div>
+                          <div style="margin-top:2%" class="col-sm-2"><p style="color:darkgrey">Female</p></div>
+                          <div class="col-sm-2">@Html.RadioButtonFor(model => model.User_Gender, "female", new { @name = "gender" })</div>
+                        </div>
+                      </div>
+                      <div style="color:red">@Html.ValidationMessageFor(model => model.User_Gender)</div>
+
+                      @Html.TextBoxFor(model => model.User_DOB, new { @class = "form-control", style = "color:white ", placeholder = "Date Of Birth", type = "date", id = "dob", name = "dob", required = "required" })
+                      <div style="color:red">@Html.ValidationMessageFor(model => model.User_DOB)</div>
+                      <button  id="submit" type="submit" name="submit"> Register </button>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section additionalScripts{
+
+  <script src="~/Scripts/jquery-1.10.2.js"></script>
+  <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+  <script src="~/Scripts/jquery-1.10.2.js"></script>
+  <script src="~/Scripts/jquery.validate.js"></script>
+  <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+ 
+  <script type="text/jscript">
+    $('#User_Email').focusout(function () {
+      var url = "/Account/IsEmailUnique";
+      var name = $('#User_Email').val();
+      $.get(url, { input: name }, function (data) {
+        if (data == "Email Available") {
+          $("#result").html("<span style='color:green'></span>");
+          $("#User_Email").css('background-color', '');
+        }
+        else {
+          $("#result").html("<span style='color:red'></span>");
+          $("#User_Email").css('background-color', '#e97878');
+        }
+      });
+    })
+  </script>
+
+  
+}

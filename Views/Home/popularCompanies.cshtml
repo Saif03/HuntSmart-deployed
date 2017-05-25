@@ -1,0 +1,126 @@
+﻿@model List<HuntSmart.Models.Company>
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Popular Companies - Hunt Smart";
+}
+<div id="main-wrapper" style="background:#fff">
+
+  <section class="pro-mem">
+    <div class="container pb30">
+      <div class="row" style="padding-bottom: 24px;padding-top: 24px;">
+        <div class="col-md-9">
+          <h2>Popular Companies: </h2>
+        </div>
+      </div>
+
+      <!-- companies -->
+      <div id="toCopy" style="display:flex;flex-flow:row wrap;justify-content:flex-start;align-items:center;margin:0 -15px;padding-top:50px">
+        <!--COMPANY TILE-->
+        @{
+          if (Model != null)
+          {
+            foreach (var c in Model)
+            {
+          <div class="col-sm-3 adjust-cards">
+            <div class="uou-block-6a">
+              <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
+              <h4><a href="/Home/profile_company"> @c.Company_Name </a> </h4>
+              <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
+                <span>Rating: </span>
+                <span style="margin-left:8px;">
+                  <i class="fa fa-star" style="color:#2DABFF"></i>
+                  <i class="fa fa-star" style="color:#2DABFF"></i>
+                  <i class="fa fa-star" style="color:#2DABFF"></i>
+                  <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
+                  <i class="fa fa-star-o" style="color:#2DABFF"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+            }
+          }
+          else
+          {
+          <h3>No Results Found!</h3>
+          }
+        }
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="text-center">
+  <div class="btn btn-inline load-more-btn">
+    <h4 style="padding-top: 60px; padding-bottom:20px;color:#333333">load more</h4>
+  </div>
+</div>
+
+<div title="Code: 0xe834" style="padding-top: 0px; display:none;padding-bottom:20px" class="text-center loader">
+  <i class="demo-icon animate-spin">&#xe834;</i>
+</div>
+
+@section additionalStyles{
+  <style>
+    .demo-icon {
+      font-family: "fontello";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;
+      /* opacity: .8; */
+      /* For safety - reset parent styles, that can break glyph codes*/
+      font-variant: normal;
+      text-transform: none;
+      /* fix buttons height, for twitter bootstrap */
+      line-height: 1em;
+      /* Animation center compensation - margins should be symmetric */
+      /* remove if not needed */
+      margin-left: .2em;
+      /* You can be more comfortable with increased icons size */
+      font-size: 500%;
+      /* Font smoothing. That was taken from TWBS */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      /* Uncomment for 3D effect */
+      text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+    }
+  </style>
+  <link rel="stylesheet" href="~/Content/animation.css">
+  <!--[if IE 7]><link rel="stylesheet" href="~/Content/fontello-ie7.css"><![endif]-->
+  <style>
+    /*.comp-container{
+      display:flex;
+      align-items:center;
+    }*/
+    .adjust-cards img {
+      height: 250px;
+    }
+  </style>
+}
+@section additionalScripts{
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.load-more-btn').click(function () {
+        $('.loader').show();
+
+        setTimeout(function () {
+          $("#toCopy").children().clone().appendTo("#toCopy");
+          $('.loader').hide();
+        }, 1000);
+      });
+    });
+  </script>
+
+  <script src="~/Scripts/plugins/superfish.min.js"></script>
+  <script src="~/Scripts/plugins/rangeslider.min.js"></script>
+  <script src="~/Scripts/uou-accordions.js"></script>
+  <script src="~/Scripts/uou-tabs.js"></script>
+  <script src="~/Scripts/plugins/select2.min.js"></script>
+  <script src="~/Scripts/owl.carousel.min.js"></script>
+  <script src="~/Scripts/gmap3.min.js"></script>
+  <script src="~/Scripts/scripts.js"></script>
+}

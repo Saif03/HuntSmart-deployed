@@ -1,0 +1,215 @@
+﻿@model Tuple<List<HuntSmart.Models.Company>, List<HuntSmart.Models.Company>, List<HuntSmart.Models.Company>>
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Hunt Smart - Know before you go";
+}
+<!--HERO IMAGE-->
+<div class="demo-1">
+  <div class="content">
+     
+    <!--HERO IMAGE-->
+    <div id="large-header" class="large-header" style="height: 613px;">
+      <canvas id="demo-canvas" width="1366" height="613"></canvas>
+      <!--HERO TEXT-->
+      <h1 class="main-title" style="width: 100%;">
+        <span class="thin">Find</span>
+        <br>Professional Environment<br>
+        <span class="thin">Made For You</span>
+      </h1>
+      <!--HERO SCROLL BUTTON-->
+      <section id="section03" class="demo">
+        <a id="scroll-button" href="#codrops-header"><span></span>Start</a>
+      </section>
+    </div>
+    <!--SECTION INTRO HEADING-->
+    <div id="codrops-header" class="codrops-header">
+      <h1 style="padding-top: 80px; padding-bottom:20px">Companies You Might Be Interested In</h1>
+    </div>
+  </div>
+</div>
+<!-- top / Popular / New -->
+<section class="pro-mem">
+  <div class="container pb30">
+    <!--POPULAR COMPANIES HEADER-->
+    <div class="row" style="padding-bottom: 24px;">
+      <div class="col-md-9">
+        <h2>Popular Companies</h2>
+      </div>
+      <div class="col-md-3">
+        <h4 style="float:right;padding-top:40px;"><a href="/Home/popularCompanies"> See more </a> </h4>
+      </div>
+    </div>
+    <!--SOME POPLUAR COMPANIES-->
+    <div class="row comp-container">
+      <!--COMPANY TILE-->
+      @{
+        if (Model.Item1 != null)
+        {
+          foreach (var c in Model.Item1)
+          {
+            <div class="col-sm-3 adjust-cards">
+              <div class="uou-block-6a">
+                <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
+                <h4><a href="/Home/profile_company"> @c.Company_Name </a> </h4>
+                <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
+                  <span>Rating: </span>
+                  <span style="margin-left:8px;">
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-o" style="color:#2DABFF"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      }
+    </div>
+    <!--TOP COMPANIES HEADER-->
+    <div class="row" style="padding-bottom: 24px;">
+      <div class="col-md-9">
+        <h2>Top Companies</h2>
+      </div>
+      <div class="col-md-3">
+        <h4 style="float:right;padding-top:40px;"><a href="/Home/topCompanies"> See more </a> </h4>
+      </div>
+    </div>
+    <!--SOME TOP COMPANIES-->
+    <div class="row comp-container" style="display:flex;align-items:center">
+      <!--COMPANY TILE-->
+      @{
+        if (Model.Item2 != null)
+        {
+          foreach (var c in Model.Item2)
+          {
+            <div class="col-sm-3 adjust-cards">
+              <div class="uou-block-6a">
+                <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
+                <h4><a href="/Home/profile_company"> @c.Company_Name </a> </h4>
+                <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
+                  <span>Rating: </span>
+                  <span style="margin-left:8px;">
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-o" style="color:#2DABFF"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      }
+    </div>
+    <!--NEW COMPANIES HEADER-->
+    <div class="row" style="padding-bottom: 24px;">
+      <div class="col-md-9">
+        <h2>New Companies</h2>
+      </div>
+      <div class="col-md-3">
+        <h4 style="float:right;padding-top:40px;"><a href="/Home/newCompanies"> See more </a> </h4>
+      </div>
+    </div>
+    <!--SOME NEW COMPANIES-->
+    <div class="row comp-container">
+      <!--COMPANY TILE-->
+      @{
+        if (Model.Item3 != null)
+        {
+          foreach (var c in Model.Item3)
+          {
+            <div class="col-sm-3 adjust-cards">
+              <div class="uou-block-6a">
+                <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
+                <h4><a href="/Home/profile_company"> @c.Company_Name </a> </h4>
+                <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
+                  <span>Rating: </span>
+                  <span style="margin-left:8px;">
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
+                    <i class="fa fa-star-o" style="color:#2DABFF"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      }
+    </div>
+  </div>
+</section>
+@section additionalStyles{
+  <link rel="stylesheet" type="text/css" href="~/Content/normalize.css">
+  <link rel="stylesheet" type="text/css" href="~/Content/demo.css">
+  <link rel="stylesheet" type="text/css" href="~/Content/component.css">
+  <style>
+    /*.comp-container{
+      display:flex;
+      align-items:center;
+    }*/
+    .adjust-cards img {
+      height: 250px;
+    }
+  </style>
+}
+@section additionalScripts{
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#main-logo').attr('href', '#');
+
+      //if (window.pageYOffset <= 10) {}
+      $('.opaque-navbar').removeClass('opaque');
+      $('.navbar-a-color').css('color', '#337ab7');
+      $('#search-field').hide();
+
+      // FOR SCROLLING NAVBAR EFFECT
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 10) {
+          $('.opaque-navbar').addClass('opaque');
+          $('.navbar-a-color').css('color', '#ffffff');
+          $('#search-field').show();
+        }
+        else {
+          $('.opaque-navbar').removeClass('opaque');
+          $('.navbar-a-color').css('color', '#337ab7');
+          $('#search-field').hide();
+        }
+      });
+
+      // FOR SCROLL BUTTON
+      $(function () {
+        $('#scroll-button').on('click', function (e) {
+          e.preventDefault();
+          $('html, body').animate({ scrollTop: $('#codrops-header').offset().top }, 500, 'linear');
+        });
+      });
+
+      // FOR ANIMATED BACKGROUND
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7243260-2']);
+      _gaq.push(['_trackPageview']);
+      (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      });
+
+      //for search button redirection
+      $('#search-button').click(function () {
+        location.href = "/Home/companylist";
+      });
+    });
+  </script>
+  <script type="text/javascript" async="" src="~/Scripts/ga.js"></script>
+  <script src="~/Scripts/TweenLite.min.js"></script>
+  <script src="~/Scripts/EasePack.min.js"></script>
+  <script src="~/Scripts/rAF.js"></script>
+  <script src="~/Scripts/demo-1.js"></script>
+}

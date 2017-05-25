@@ -1,0 +1,826 @@
+﻿@model Tuple<List<HuntSmart.Models.User>, List<HuntSmart.Models.Education>, List<HuntSmart.Models.Skill>, List<HuntSmart.Models.UserSkill>>
+
+
+    @{
+        List<string> degree = new List<string>();
+        List<string> institute = new List<string>();
+        List<string> edstart = new List<string>();
+        List<string> edend = new List<string>();
+        List<int> edid = new List<int>();
+
+        degree = (List<string>)Session["degree"];
+        institute = (List<string>)Session["institute"];
+        edstart = (List<string>)Session["edstart"];
+        edend = (List<string>)Session["edend"];
+        edid = (List <int>)Session["edid"];
+
+        List<string> skill = new List<string>();
+        skill= (List<string>)Session["skill"];
+
+
+        List<string> skillname = new List<string>();
+        skillname = (List<string>)Session["skillname"];
+
+        List<int> skillid = new List<int>();
+        skillid = (List<int>)Session["skillid"];
+        
+    }
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>HuntSmart - Know before you go </title>
+  <link rel="shortcut icon" href="~/img/favicon-64x64.png">
+
+  <!-- Fonts -->
+  <link href="~/Content/fonts.css" rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="~/Content/raleway-font.css">
+
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="~/Content/owl.carousel.css">
+  <link rel="stylesheet" href="~/Content/main-style.css">
+
+  <script src="~/Scripts/jquery.min.1.11.1.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+  <link rel="stylesheet" type="text/css" href="~/Content/navbar.css">
+  <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
+  <link rel="stylesheet" href="~/Content/userprofile.css">
+    <script src="~/Scripts/userprofile.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <script>
+    $(document).ready(function () {
+      //for search button redirection
+      $('#search-button').click(function () {
+        location.href = "/Home/companylist_l";
+      })
+    });
+
+    function upedu() {
+        alert("hello");
+        var v = document.getElementById("upedu").value;
+        alert(v);
+        document.getElementById("chkbtn").value = v;
+
+    }
+  </script>
+    
+</head>
+
+<body>
+  <div class="toolbar navbar navbar-inverse navbar-fixed-top opaque-navbar opaque">
+    <div class="uou-block-1a blog">
+      <div class="container" style="padding-top: 5px">
+        <div class="logo" style="float:left">
+          <div class="navbar-header">
+            <a class="navbar-brand navbar-a-color" href="/Home/Index_l" style="font-size: 38px;padding-left:0px;color:#ffffff;">Hunt Smart</a>
+          </div>
+            
+        </div>
+        <form class="navbar-form navbar-left" id="search-field" role="search" action="/Home/companylist" style="height:33px;width:561px;padding-left:30px;">
+          <div class="input-group stylish-input-group" style="height:33px;outline:aliceblue;">
+            <input type="text" class="form-control" style="height:33px;width:450px;color:#545454;" placeholder="Search">
+            <span class="input-group-addon">
+              <button title="Advanced Search">
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
+              <button type="submit" title="Search">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+              <img src="~/Images/avatar-2.jpg" class="img-circle special-img">
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="navbar-login">
+
+                  <p class="text-center">
+                    <img src="~/Images/avatar-2.jpg" style="height:90px">
+                  </p>
+
+                  <div class="row">
+                    @{
+                        if (Session["l_fname"].ToString() != null)
+                        {
+                        <div>
+                          <p class="text-center col-sm-2"><strong>@Session["l_fname"].ToString()</strong></p>
+                        </div>
+                        }
+                    }
+
+
+                    @{
+                        if (Session["l_lname"].ToString() != null)
+                        {
+                        <div>
+                          <p class="text-center col-sm-2"><strong>@Session["l_lname"].ToString()</strong></p>
+                        </div>
+                        }
+                    }
+                  </div>
+
+                  <p class="text-center small"></p>
+
+                  <p class="text-left">
+                    <a href="/User/userProfile" class="btn btn-primary btn-block btn-sm" style="background-color:#2dabff">Profile</a>
+                  </p>
+                </div>
+              </li>
+              <li class="divider navbar-login-session-bg"></li>
+              <li><a href="/Home/userDashboard">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+              <li class="divider"></li>
+              <li><a href="/Home/index">Log Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    
+  <div id="main-wrapper">
+
+    <!------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Start User Social profile-->
+
+    <div class="compny-profile">
+      <!--------------------------------------------------- SUB Banner Start--------------------------------------->
+      <div class="profile-bnr user-profile-bnr">
+        <div class="container">
+          <div class="pull-left">
+            <div class="row">
+              <div><h2 class="text-center col-sm-2"><strong></strong></h2></div>
+              <div><h2 class="text-center col-sm-2"><strong></strong></h2></div>
+            </div>
+            <h5>designation</h5>
+          </div>
+        </div>
+      </div>
+      <!--------------------------------------------------- SUB Banner End--------------------------------------->
+      <!----------------------------------------------- Profile Company Content -------------------------------->
+      <div class="profile-company-content user-profile main-user" data-bg-color="f5f5f5">
+        <div class="container">
+          <div class="row">
+
+            <!---------------------- Nav Tabs ------------------>
+            <div class="col-md-12">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" onclick="location.href = '/User/userProfile'">Profile</a></li>
+                <li><a data-toggle="tab" onclick="location.href = '/User/experience'">Experience</a></li>
+                <li><a data-toggle="tab" onclick="location.href = '/User/userDashboard'">Dashboard</a></li>
+              </ul>
+            </div>
+            <!---------------------- Nav Tabs Ends ------------------>
+            <!-- ---------------------Tab Content --------------------->
+            <div class="col-md-12">
+              <div class="tab-content">
+
+                <!-- PROFILE -->
+                <div id="profile" class="tab-pane fade in active">
+                  <!-- ---------------------------ABOUT------------------------------------>
+                  <br />
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="profile-main">
+                                <div class="row">
+                                    <h3>About</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="profile-in">
+                                            <div class="media-left">
+                                                <div class="img-profile"> <img id="coverphoto" class="media-object" src="~/Images/avatar-2.jpg" alt=""> </div>
+                                            </div>
+                                            <div class="image-upload">
+                                                <label for="file-input">
+                                                    <img id="profilephoto" src="~/images/camera1.png" />
+                                                </label>
+
+                                                <input id="file-input" onchange="readURL(this);" type="file" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--////////////////Personal Information Form ! ////////////////////-->
+                                    <script>
+                                        function editp() {
+                                            document.getElementById("saveprofile").style.visibility = "visible";
+                                            document.getElementById("cancleprofile").style.visibility = "visible";
+
+                                            document.getElementById("employeefname").disabled = false;
+                                            document.getElementById("employeefname").style.border = "2px solid #0099CC";
+
+                                            document.getElementById("employeelname").disabled = false;
+                                            document.getElementById("employeelname").style.border = "2px solid #0099CC";
+
+                                            document.getElementById("dob").disabled = false;
+                                            document.getElementById("dob").style.border = "2px solid #0099CC";
+
+                                            document.getElementById("contactno").disabled = false;
+                                            document.getElementById("contactno").style.border = "2px solid #0099CC";
+
+                                            document.getElementById("area1").disabled = false;
+                                            document.getElementById("area1").style.border = "2px solid #0099CC";
+                                        }
+                                    </script>
+                                    <form id="personalform" method="post" action="PutPersonalDetails">
+                                        {
+                                        <div class="col-md-8">
+                                            <div style="background-color:ghostwhite" class="sidebar">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <h5 class="main-title">Personal Details</h5>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <a id="editprofileicon" onclick="javascript: editp()" href="#"><img src="~/images/edit-pencil2.png" /></a>
+                                                        <a id="editprofile" onclick="javascript: editp()" href="#">Edit</a>
+                                                    </div>
+                                                </div>
+                                                <div class="sidebar-information">
+                                                    <div class="container">
+                                                        <div class="form-group row">
+                                                            <label id="lbl" style="font-size:15px" class="control-label col-sm-2" for="employeefname">First Name:</label>
+                                                            <div class="col-sm-5">
+                                                                @{ if (Session["l_fname"] != null)
+                                                                    {
+
+                                                                        <input id="employeefname" name="employeefname" style="color:black; border-color:cadetblue" value="@Session["l_fname"]" type="text" class="form-control w3-right" placeholder="First name" disabled>
+                                                                    }   }
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label id="lbl" style="font-size:15px;border-color:cadetblue" class="control-label col-sm-2" for="employeelname">Last Name:</label>
+                                                            <div class="col-sm-5">
+                                                                @{ if (Session["l_lname"] != null)
+                                                                    {
+                                                                        <input id="employeelname" style="color:black;border-color:cadetblue" name="employeelname" value="@Session["l_lname"]" type="text" class="form-control w3-right" placeholder="Last name" disabled>
+                                                                    } }
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label id="lbl" style="font-size:15px;border-color:cadetblue" class="control-label col-sm-2" for="dob">Date Of Birth:</label>
+                                                            <div class="col-sm-5">
+                                                                @{ if (Session["l_dob"] != null)
+                                                                    {
+                                                                        <input id="dob" name="dob" style="color:black;border-color:cadetblue" type="date" value="@Session["l_dob"]" class="form-control w3-right" placeholder="Enter Date Of Birth" disabled>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label id="lbl" style="font-size:15px;border-color:cadetblue" class="control-label col-sm-2" for="contactno">Contact no:</label>
+                                                            <div class="col-sm-5">
+                                                                @{ if (Session["l_contact"] != null)
+                                                                    {
+                                                                        <input id="contactno" style="color:black; font-size:15px;border-color:cadetblue " name="contactno" value="@Session["l_contact"]" type="text" class="form-control w3-right" placeholder="Contact no." disabled>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="contactno" style="color:black;border-color:cadetblue; font-size:15px" name="contactno" value="" type="text" class="form-control w3-right" placeholder="Contact no." disabled>
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-2"><p></p></div>
+                                                            <div class="col-md-5">
+                                                                @{ if (Session["l_des"] != null)
+                                                                    {
+                                                                        <textarea style="font-size:15px;color:black;height:130px;border-color:cadetblue" id="area1" name="area1" placeholder="Enter Your Description here" disabled>@Session["l_des"]</textarea>
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <textarea style="font-size:15px;color:black; height:130px;border-color:cadetblue" id="area1" name="area1" placeholder="Enter Your Description here" disabled></textarea>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        @{if (Session["lemail"] != null)
+                                                            {
+                                                                <input style="visibility:hidden" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
+                                                            }
+                                                        }
+
+                                                        <br />
+                                                        <br />
+                                                        <div class="row">
+                                                            <div class="col-sm-2"><p></p></div>
+                                                            <div class="col-sm-9">
+                                                                <button type="submit" id="saveprofile" name="saveprofile" value="saveprofile" class="btn btn-default">Save</button>
+                                                                <button id="cancleprofile" name="cancleprofile" onclick="javacript: cancleprofile()" value="cancleprofile" class="btn btn-default">Cancle</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ---------------------------ABOUT END------------------------------------>
+                        <br />
+                        <div class="container sidebar">
+<!--############################################################################################################################################-->
+                        <div class="">
+                            <div class="row ">
+                                <div class="">
+                                    <div class="container col-sm-12">
+                                        <div class="row">
+<!--****************************************************************************************************************************************-->
+                                          <div class="main-title col-md-9"><h5>Education</h5></div>
+                                            <div style="margin-top:30px" class="col-sm-3">
+                                                <a onclick="javascript: addeducation()" style="margin-left:25% " href="#edu-detail">
+                                                    <img src="~/images/plus.png" alt="image">
+                                                </a>
+                                                <a id="add" style="font-size:15px" name="add" onclick="javascript: addeducation()">Add Education</a>
+                                            </div>
+                                          </div>
+<!--#################################################################################################################################################-->
+                                      <br />
+                                      <br />
+                                          <div style="display:none" id="edu-detail">
+                                            <div style="background-color:ghostwhite">
+                                                <div style="margin-top:30px" class="col-md-12">
+                                                    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                                                    <form method="post" action="PostEducation" id="eduform">
+                                                        <div style="background-color:ghostwhite" class="sidebar">
+                                                            <div class="row">
+                                                                <div class="col-md-10">
+                                                                    <h5 class="main-title">Educational Details</h5>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div>
+                                                                <div class="">
+
+                                                                    <div class="form-group row">
+                                                                        <label id="lbl" class="control-label col-sm-2" for="school">School/Institute:</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input id="school" name="school" type="text" class="form-control w3-right" placeholder="Enter School/Institute">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <label id="lbl" class="control-label col-sm-2" for="degree">Degree:</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input id="degree" name="degree" type="text" class="form-control w3-right" placeholder="Degree">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <label id="lbl" class="control-label col-sm-2" for="edu-st-dt">Start Date:</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input id="edu-st-dt" name="edu-st-dt" type="date" class="form-control w3-right" placeholder="Enter School Start date attended">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <label id="lbl" class="control-label col-sm-2" for="edu-end-dt">End Date:</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input id="edu-end-dt" name="edu-end-dt" type="date" class="form-control w3-right" placeholder="Enter School End date attended">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    @{if (Session["lemail"] != null)
+                                                                        {
+                                                                            <input style="visibility:hidden" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
+                                                                        }
+                                                                    }
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2"><p></p></div>
+                                                                        <div class="col-sm-9">
+                                                                            <button style="background-color:dodgerblue" id="addedu" name="addedu" value="save" class="btn btn-default">Add</button>
+                                                                            <input onclick="javascript: cancleedu()" style="background-color:dodgerblue" class="btn btn-default" type="button" value="Cancle" />
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+<!--***************************************************************************************************************************************************************-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!--###########################################################################################################################################################-->
+<div>
+    <br />
+    <br />
+                                        <div class="">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+
+                                                    <div class="sidebar">
+                                                        
+                                                        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                                                        <div>
+                                                            <div>
+
+                                                                @{
+                                                                    <br /><br />
+                                                                    for (int i = 0; i < degree.Count(); i++)
+                                                                    {
+                                                                        var v = edstart.ElementAt(i) + "  " + " _ " + "  " + edend.ElementAt(i);
+                                                                        var vid = "ed" + edid.ElementAt(i);
+                                                                        var fid = "fd" + edid.ElementAt(i);
+
+
+
+                                                                        <div id="@(vid)" data-id="@(vid)" style="background-color:ghostwhite" class="sidebar-information sidebar select-link">
+
+                                                                            <br />
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-11"> </div>
+                                                                                <div class="col-sm-1">
+                                                                                    <a id="editprofileicon" href="#"><img src="~/images/edit-pencil2.png" /></a>
+                                                                                    <a style="font-size:15px" id="editprofile" href="#pdate">Edit</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br />
+
+                                                                            <p id="pdegree" style="font-size:15px;font-weight:bold">@degree.ElementAt(i)</p>
+                                                                            <p id="pinstitute" style="font-size:15px; font-style:italic; font-weight:500">@institute.ElementAt(i)</p>
+                                                                            <p id="pdate" style="font-size:15px">@v</p>
+                                                                            <p style="visibility:hidden" id="pid">@edid.ElementAt(i)</p>
+
+                                                                        </div>
+
+                                                                        <div id="@(fid)" data-id="@(fid)" style="background-color:ghostwhite; display:none" class="sidebar-information sidebar select-link1">
+
+                                                                            <form method="post" action="PutEducation" id="fform">
+
+                                                                                <p style="font-weight:bold">Degree</p>
+                                                                                <input style="color:black" id="fdegree" name="fdegree" type="text" value="@degree.ElementAt(i)" />
+                                                                                <p style="font-weight:bold">Institute</p>
+                                                                                <input style="color:black" id="finstitute" name="finstitute" type="text" value="@institute.ElementAt(i)" />
+                                                                                <p style="font-weight:bold">StartDate</p>
+                                                                                <input style="color:black" id="fsdate" name="fsdate" type="date" value="@edstart.ElementAt(i)" />
+                                                                                <p style="font-weight:bold">EndDate</p>
+                                                                                <input style="color:black" id="fedate" name="fedate" type="date" value="@edend.ElementAt(i)" />
+                                                                                <input style="color:black; visibility:hidden" id="fid" name="fid" type="text" value="@edid.ElementAt(i)" />
+
+                                                                                <input type="submit" name="chkbtn" value="update" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
+                                                                                <input type="submit" name="chkbtn" value="delete" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
+                                                                                <input type="button" onclick="javascript: cancleeduupdate()" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" name="cancleedu" value="cancle" class="btn btn-default" />
+
+                                                                            </form>
+                                                                        </div>
+
+                                                                    }
+
+                                                                }
+
+                                                                <script>
+                                                                    var id;
+                                                                    var d;
+
+                                                                    function addeducation() {
+                                                                        document.getElementById("edu-detail").style.display = "block";
+                                                                    }
+                                                                    function cancleedu() { document.getElementById("edu-detail").style.display = "none"; }
+
+
+                                                                    
+
+
+                                                                    $('.select-link').click(function () {
+                                                                        id = $(this).attr('data-id');
+                                                                        d = "fd" + id.charAt(2)+id.charAt(3)+id.charAt(4)+id.charAt(5);
+                                                                       
+                                                                       
+                                                                        document.getElementById(id).style.display = "none";
+                                                                        document.getElementById(d).style.display = "block";
+
+
+                                                                    });
+                                                                    function cancleeduupdate() {
+                                                                        document.getElementById(id).style.display = "block";
+                                                                        document.getElementById(d).style.display = "none";
+
+                                                                    }
+
+                                                                </script>
+
+                                                            </div>
+                                                             </div>
+
+                                                        </div>
+                                                   
+                                                    <!--Education end-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                 </div>
+                            </div>
+                    <div/>                                      
+ <!--##############################################################################################################################################-->
+                 
+                        
+ <!--**********************************************************************************************************************************************-->                                             
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--*************************************************************SKILLLLLLLL*******************************************************************-->
+<!--#######################################################################################################################################-->
+<!--#######################################################################################################################################-->
+<!--#######################################################################################################################################-->
+
+
+            <div class="container sidebar">
+                <!--############################################################################################################################################-->
+                <div class="">
+                    <div class="row ">
+                        <div class="">
+                            <div class="container col-sm-12">
+                                <div class="row">
+                                    <!--****************************************************************************************************************************************-->
+                                    <div class="main-title col-md-9"><h5>SKILLS</h5></div>
+                                    <div style="margin-top:30px" class="col-sm-3">
+                                        <a onclick="javascript: addskill()" style="margin-left:25% " href="#edu-detail">
+                                            <img src="~/images/plus.png" alt="image">
+                                        </a>
+                                        <a id="add" style="font-size:15px" name="add" onclick="javascript: addskill()">Add SKILL</a>
+                                    </div>
+                                </div>
+                                <!--#################################################################################################################################################-->
+                                <br />
+                                <br />
+                                <div  id="skill-detail" >
+                                    <div style="background-color:ghostwhite">
+                                        <div style="margin-top:30px" class="col-md-12">
+                                            <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                                            <form method="post" action="PostUserSkill" id="skillform">
+                                                <div style="background-color:ghostwhite" class="sidebar">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <h5 class="main-title">SKILLS</h5>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <script> function selectskill(row) {
+                                                             var x = row.cells;
+                                                             document.getElementById("sskill").value = x[0].innerHTML;
+                                                         }
+                                                        </script>
+                                                        <div class="">
+
+                                                            @{if (Session["lemail"] != null)
+                                                                {
+                                                                    <input style="visibility:hidden; margin-top:-20px" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
+                                                                }
+                                                            }
+                                                            <div class="form-group row">
+                                                                <label id="lbl" class="control-label col-sm-2" for="skill" style="font-size:15px">Search Skills</label>
+                                                                <div class="col-sm-8">
+                                                                    <input id="sskill" name="sskill" style="color:black" type="text" class="form-control w3-right" placeholder="Enter or Search skill">
+                                                                </div>
+                                                            </div>
+                                                      <div id="dss"  style="margin-left:180px; width:700px; height:auto; background-color:ghostwhite; cursor:pointer">
+                                                            <p style="font-size:15px;color:blue" id="pss">
+                                                                <table style="color:blue; font-size:15px" >
+                                                                <tr id="tr1" onclick="selectskill(this)"><td id="td1" ></td></tr> 
+                                                                <tr id="tr2" onclick="selectskill(this)"><td id="td2" ></td></tr> 
+                                                                <tr id="tr3" onclick="selectskill(this)"><td id="td3" ></td></tr> 
+                                                                <tr id="tr4" onclick="selectskill(this)"><td id="td4" ></td></tr> 
+                                                                <tr id="tr5" onclick="selectskill(this)"><td id="td5" ></td></tr> 
+                                                                </table>
+                                                                </div>     
+                                                            
+                                                            <div class="row">
+                                                                <div class="col-sm-2"><p></p></div>
+                                                                <div class="col-sm-9">
+                                                                    <button type="submit" style="background-color:dodgerblue" id="addedu" name="addedu" value="save" class="btn btn-default">Add</button>
+
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--***************************************************************************************************************************************************************-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--###########################################################################################################################################################-->
+                <div>
+                    <br />
+                    <br />
+                    <div class="">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="sidebar">
+
+                                    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                                    <div>
+                                        <div>
+
+                                            @{
+                                                
+                                                <br /><br />
+                                                for (int i = 0; i < skillname.Count(); i++)
+                                                {
+
+                                                            <form method="post" action="PutSkill" id="fform">
+                                                                <input style="visibility:hidden; margin-bottom:-20px" id="fiduserskillid" name="userskillid" type="text" value="@skillid.ElementAt(i)" />
+                                                                <div class="row">
+                                                                    <p class="col-lg-4" style="color:green;font-weight:bold; font-size:20px">@skillname.ElementAt(i)</p>
+                                                                    <input class="col-lg-2 btn btn-default" type="submit" name="chkbtn" value="delete" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%"  />
+                                                                </div>
+                                                            </form>
+                                                       
+                                                }
+                                            }
+
+                                            <script>
+                                                                    var id;
+                                                                    var d;
+
+                                                                    function addeducation() {
+                                                                        document.getElementById("edu-detail").style.display = "block";
+                                                                    }
+                                                                    function cancleedu() { document.getElementById("edu-detail").style.display = "none"; }
+
+
+                                                                    function addskill() {
+                                                                        document.getElementById("skill-detail").style.display = "block";
+                                                                    }
+                                                                    function cancleskill() { document.getElementById("skill-detail").style.display = "none"; }
+
+
+
+
+
+                                                                    $('.select-link').click(function () {
+                                                                        id = $(this).attr('data-id');
+                                                                        d = "fd" + id.charAt(2)+id.charAt(3)+id.charAt(4)+id.charAt(5);
+
+
+                                                                        document.getElementById(id).style.display = "none";
+                                                                        document.getElementById(d).style.display = "block";
+
+
+                                                                    });
+                                                                    function cancleeduupdate() {
+                                                                        document.getElementById(id).style.display = "block";
+                                                                        document.getElementById(d).style.display = "none";
+
+                                                                    }
+
+                                            </script>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!--Education end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div />
+  </div>
+
+  <!-- FOOTER -->
+  <div class="uou-block-4a secondary dark" style="background-color:rgba(127,127,127,0.1);margin-top: 100px">
+    <div class="container">
+      <ul class="links">
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <p>Copyright &copy; 2016 <a href="#">TeamCodeJitters</a>. All Rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+  <script src="~/Scripts/bootstrap.js"></script>
+  <script src="~/Scripts/plugins/superfish.min.js"></script>
+  <script src="~/Scripts/jquery.ui.min.js"></script>
+  <script src="~/Scripts/plugins/rangeslider.min.js"></script>
+  <script src="~/Scripts/plugins/jquery.flexslider-min.js"></script>
+  <script src="~/Scripts/uou-accordions.js"></script>
+  <script src="~/Scripts/uou-tabs.js"></script>
+  <script src="~/Scripts/plugins/select2.min.js"></script>
+  <script src="~/Scripts/owl.carousel.min.js"></script>
+  <script src="~/Scripts/gmap3.min.js"></script>
+  <script src="~/Scripts/scripts.js"></script>
+
+
+          <script type="text/jscript">
+              $('#sskill').keypress(function () {
+                  var url = "/User/GetSkill";
+                  var name = $('#sskill').val();
+
+                  $.get(url, { input: name }, function (data) {
+                      
+                      var field = data;
+                      var sk = field.split(",");
+                      if (sk[0] != null)
+                          {
+                          $("#td1").html(sk[0]);
+                          }
+                      if (sk[1] != null)
+                      {
+                          $("#td2").html(sk[1]);
+                      }
+                      if (sk[2] != null)
+                      {
+                          $("#td3").html(sk[2]);
+                      }
+                      if (sk[3] != null)
+                      {
+                          $("#td4").html(sk[3]);
+                      }
+                      if (sk[4] != null)
+                      {
+                          $("#td5").html(sk[4]);
+                      }
+                      
+
+                      //var vs = sk.join('<br>');
+                      //for (i = 0 ; i < sk.length; i++)
+                      //{
+                       //   $('#pss').html(vs);
+                         
+
+                      //}
+           
+                     
+
+                  });
+              });
+
+
+          </script>
+
+</body>
+</html>
