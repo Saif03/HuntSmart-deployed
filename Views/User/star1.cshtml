@@ -1,0 +1,124 @@
+﻿@{
+
+    List<string> company = new List<string>();
+    company = (List<string>)Session["ucname"];
+
+    List<int> exid = new List<int>();
+    List<int> ucid = new List<int>();
+    exid = (List<int>)Session["exid"];
+    ucid = (List<int>)Session["ucid"];
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RateYo - Scratchpad</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/Scripts/jquery.rateyo.min.css" />
+   
+    
+</head>
+<body>
+   
+    <center> <h1>Add Review</h1></center>
+        <br />
+        <br />
+        <form method="post" action="AddReview" name="reviewform">
+            <label style="color:black; font-size:15px">Select Company</label>
+            <br />
+            <select name="comdrop" style="width:300px; font-size:15px">
+                <option value="0">Select Company</option>
+                @for (int i = 0; i < company.Count(); i++)
+                {
+                    <option value="@ucid.ElementAt(i)">@company.ElementAt(i)</option>
+                }
+                
+            </select>
+            <br />
+            <br />
+            <br />
+            <label style="color:black; font-size:20px; font-style:italic; font-family:Calibri">Please Rate the following about the company:</label>
+            <br />
+            <br />
+            <br />
+
+            <center>
+                <label style="color:dodgerblue; font-size:20px">Gender Biasness</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t1" id="t1">
+
+                <label style="color:dodgerblue; font-size:20px">Behaviour of Emplyee Towards Each Other</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black;visibility:hidden; font-family:Calibri" name="t2" id="t2">
+
+                <label style="color:dodgerblue; font-size:20px">Late Sitting</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t3" id="t3">
+
+                <label style="color:dodgerblue; font-size:20px">Innovation In Products</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t4" id="t4">
+
+                <label style="color:dodgerblue; font-size:20px">Salary Pakages</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t5" id="t5">
+
+                <label style="color:dodgerblue; font-size:20px">Increments</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t6" id="t6">
+
+                <label style="color:dodgerblue; font-size:20px">Oppurtunity for Promotion</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden" ; font-family:Calibri name="t7" id="t7">
+
+
+                <label style="color:dodgerblue; font-size:20px">Job Security</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t8" id="t8">
+
+
+                <label style="color:dodgerblue; font-size:20px">Change In Working technology</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t9" id="t9">
+
+
+                <label style="color:dodgerblue; font-size:20px">Job Stress Level</label>
+                <div class="rateYo" id="a1"></div>
+                <input type="text" style="color:black; visibility:hidden; font-family:Calibri" name="t10" id="t10">
+            </center>
+
+            <label style="color:dodgerblue; font-size:20px; font-family:Calibri; font-style:italic">Please Give Comment About the Companyy</label>
+            <textarea style="font-size:15px;color:black;height:130px;border-color:cadetblue" id="area1" name="area1" placeholder="Enter Your Comment here"></textarea>
+            @{if (Session["lemail"] != null)
+                {
+                    <input style="visibility:hidden; margin-top:-20px" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
+                }
+            }
+            <br />
+            <br />
+            <input type="submit" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="submit" class="btn btn-default" value="Submit"/>
+            
+        </form>
+
+   
+
+
+
+            <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+            <script type="text/javascript" src="~/Scripts/jquery.rateyo.js"></script>
+            <script>
+                $(".rateYo").rateYo({
+                    onSet: function (rating, rateYoInstance) {
+                        $(this).next().val(rating);
+                    },
+                    rating: 0,
+                    starWidth: "20px",
+                    numStars: 5,
+                    fullStar: true
+                });
+
+            </script>
+</body>
+</html>

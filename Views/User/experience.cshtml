@@ -1,579 +1,410 @@
-﻿
+﻿@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Hunt Smart - Know before you go";
+}
+
 @{
-    List<string> designation = new List<string>();
-    List<string> company = new List<string>();
-    List<string> exstart = new List<string>();
-    List<string> exend = new List<string>();
-    List<int> exid = new List<int>();
+  List<string> designation = new List<string>();
+  List<string> company = new List<string>();
+  List<string> exstart = new List<string>();
+  List<string> exend = new List<string>();
+  List<int> exid = new List<int>();
+  List<int> ucid = new List<int>();
 
-    designation = (List<string>)Session["designation"];
-    company= (List<string>)Session["ucname"];
-    exstart = (List<string>)Session["uexstart"];
-    exend = (List<string>)Session["uexend"];
-    exid = (List<int>)Session["ucid"];
-
-   
-
-   // List<string> company = new List<string>();
-  //  skillname = (List<string>)Session["company"];
-
-    List<int> cid = new List<int>();
-    cid = (List<int>)Session["cid"];
-
+  designation = (List<string>)Session["designation"];
+  company = (List<string>)Session["ucname"];
+  exstart = (List<string>)Session["uexstart"];
+  exend = (List<string>)Session["uexend"];
+  exid = (List<int>)Session["exid"];
+  ucid = (List<int>)Session["ucid"];
 
 }
 
-<!doctype html>
-<html lang="en">
+<div id="main-wrapper">
+  <div class="compny-profile">
+    <!-- SUB Banner -->
+    <div class="profile-bnr user-profile-bnr">
+      <div class="container">
+        <div class="pull-left">
+        </div>
+        <!-- Top Riht Button -->
+        <div class="right-top-bnr">
+          <div class="sidebar">
+            <h2 class="main-title">Social Profiles</h2>
+            <ul class="socil">
+              <li><a href="#."><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#."><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#."><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#."><i class="fa fa-twitter"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Profile Company Content -->
+    <div class="profile-company-content user-profile main-user" data-bg-color="f5f5f5">
+      <div class="container">
+        <div class="row">
+          <!-- Nav Tabs -->
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" onclick="location.href = '/User/userProfile'">Profile</a></li>
+              <li><a data-toggle="tab" onclick="location.href = '/User/experience'">Experience</a></li>
+              <li><a data-toggle="tab" onclick="location.href = '/User/userDashboard'">Dashboard</a></li>
+            </ul>
+          </div>
+          <!-- Tab Content -->
+          <div class="col-md-12">
+            <!--SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
+            <div class="container sidebar">
+              <!--############################################################################################################################################-->
+              <div class="">
+                <div class="row ">
+                  <div class="">
+                    <div class="container col-sm-12">
+                      <div class="row">
+                        <!--****************************************************************************************************************************************-->
+                        <div class="main-title col-md-9"><h5>Experience</h5></div>
+                        <div style="margin-top:30px" class="col-sm-3">
+                          <a onclick="javascript: addeducation()" style="margin-left:25% " href="#edu-detail">
+                            <img src="~/images/plus.png" alt="image">
+                          </a>
+                          <a id="add" style="font-size:15px" name="add" onclick="javascript: addeducation()">Add Experience</a>
+                        </div>
+                      </div>
+                      <!--#################################################################################################################################################-->
+                      <br />
+                      <br />
+                      <div style="display:none" id="edu-detail">
+                        <div style="background-color:ghostwhite">
+                          <div style="margin-top:30px" class="col-md-12">
+                            <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                            <form method="post" action="PostUserExperience" id="eduform">
+                              <div style="background-color:ghostwhite" class="sidebar">
+                                <div class="row">
+                                  <div class="col-md-10">
+                                    <h5 class="main-title">Experience Details</h5>
+                                  </div>
+                                </div>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>HuntSmart - Know before you go </title>
-  <link rel="shortcut icon" href="~/img/favicon-64x64.png">
+                                <div>
+                                  <div class="">
 
-  <!-- Fonts -->
-  <link href="~/Content/fonts.css" rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="~/Content/raleway-font.css">
+                                    <script>
+                                      function selectskill(row) {
+                                        var x = row.cells;
+                                        document.getElementById("sskill").value = x[0].innerHTML;
+                                      }
+                                    </script>
+                                    <div class="">
 
+                                      @{if (Session["lemail"] != null)
+                                        {
+                                      <input style="visibility:hidden; margin-top:-20px" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
+                                        }
+                                      }
+                                      <div class="form-group row">
+                                        <label id="lbl" class="control-label col-sm-2" for="skill" style="font-size:15px">Search Company</label>
+                                        <div class="col-sm-8">
+                                          <input id="sskill" name="sskill" style="color:black" type="text" class="form-control w3-right" placeholder="Search Company">
+                                        </div>
+                                      </div>
+                                      <div id="dss" style="margin-left:180px; width:700px; height:auto; background-color:ghostwhite; cursor:pointer">
+                                        <p style="font-size:15px;color:blue" id="pss">
+                                          <table style="color:blue; font-size:15px">
+                                            <tr id="tr1" onclick="selectskill(this)"><td id="td1"></td></tr>
+                                            <tr id="tr2" onclick="selectskill(this)"><td id="td2"></td></tr>
+                                            <tr id="tr3" onclick="selectskill(this)"><td id="td3"></td></tr>
+                                            <tr id="tr4" onclick="selectskill(this)"><td id="td4"></td></tr>
+                                            <tr id="tr5" onclick="selectskill(this)"><td id="td5"></td></tr>
+                                          </table>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label id="lbl" class="control-label col-sm-2" for="degree" style="font-size:15px">Designation:</label>
+                                      <div class="col-sm-8">
+                                        <input id="degree" name="degree" type="text" class="form-control w3-right" placeholder="Designatiom">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label id="lbl" class="control-label col-sm-2" for="edu-st-dt" style="font-size:15px">Start Date:</label>
+                                      <div class="col-sm-8">
+                                        <input id="edu-st-dt" name="edu-st-dt" type="date" class="form-control w3-right" placeholder="Enter School Start date attended">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label id="lbl" class="control-label col-sm-2" for="edu-end-dt" style="font-size:15px">End Date:</label>
+                                      <div class="col-sm-8">
+                                        <input id="edu-end-dt" name="edu-end-dt" type="date" class="form-control w3-right" placeholder="Enter School End date attended">
+                                      </div>
+                                    </div>
+
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                      <div class="col-sm-2"><p></p></div>
+                                      <div class="col-sm-9">
+                                        <button style="background-color:dodgerblue" id="addedu" name="addedu" value="save" class="btn btn-default">Add</button>
+                                        <input onclick="javascript: cancleedu()" style="background-color:dodgerblue" class="btn btn-default" type="button" value="Cancle" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <!--***************************************************************************************************************************************************************-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--###########################################################################################################################################################-->
+              <div>
+                <br />
+                <br />
+                <div class="">
+                  <div class="row">
+
+                    <div class="col-sm-12">
+
+                      <div class="sidebar">
+
+                        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                        <div>
+                          <div>
+
+                            @{
+                              <br /><br />
+                              for (int i = 0; i < designation.Count(); i++)
+                              {
+                                var v = exstart.ElementAt(i) + "  " + " _ " + "  " + exend.ElementAt(i);
+                                var vid = "ed" + exid.ElementAt(i);
+                                var fid = "fd" + exid.ElementAt(i);
+
+                            <div id="@(vid)" data-id="@(vid)" style="background-color:ghostwhite" class="sidebar-information sidebar select-link">
+
+                              <br />
+
+                              <div class="row">
+                                <div class="col-md-11"> </div>
+                                <div class="col-sm-1">
+                                  <a id="editprofileicon" href="#"><img src="~/images/edit-pencil2.png" /></a>
+                                  <a style="font-size:15px" id="editprofile" href="#pdate">Edit</a>
+                                </div>
+                              </div>
+                              <br />
+
+                              <p id="pdegree" style="font-size:15px;font-weight:bold">@designation.ElementAt(i)</p>
+                              <p id="pinstitute" style="font-size:15px; font-style:italic; font-weight:500">@company.ElementAt(i)</p>
+                              <p id="pdate" style="font-size:15px">@v</p>
+                              <p style="visibility:hidden" id="pid">@exid.ElementAt(i)</p>
+                            </div>
+
+                            <div id="@(fid)" data-id="@(fid)" style="background-color:ghostwhite; display:none" class="sidebar-information sidebar select-link1">
+
+                              <form method="post" action="PutExperience" id="fform">
+
+                                <p style="font-weight:bold">Degsignation</p>
+                                <input style="color:black" id="designation" name="designation" type="text" value="@designation.ElementAt(i)" />
+                                <p style="font-weight:bold">Company</p>
+                                <input style="color:black" id="finstitute" name="finstitute" type="text" value="@company.ElementAt(i)" />
+                                <p style="font-weight:bold">StartDate</p>
+                                <input style="color:black" id="exsdate" name="exsdate" type="date" value="@exstart.ElementAt(i)" />
+                                <p style="font-weight:bold">EndDate</p>
+                                <input style="color:black" id="exedate" name="exedate" type="date" value="@exend.ElementAt(i)" />
+                                <input style="color:black; visibility:hidden" id="exid" name="exid" type="text" value="@exid.ElementAt(i)" />
+                                <input style="color:black; visibility:hidden" id="ucid" name="ucid" type="text" value="@ucid.ElementAt(i)" />
+
+                                <input type="submit" name="chkbtn" value="update" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
+                                <input type="submit" name="chkbtn" value="delete" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
+                                <input type="button" onclick="javascript: cancleeduupdate()" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" name="cancleedu" value="cancle" class="btn btn-default" />
+                              </form>
+                            </div>
+
+                              }
+
+                            }
+
+                            <script>
+                              var id;
+                              var d;
+
+                              function addeducation() {
+                                document.getElementById("edu-detail").style.display = "block";
+                              }
+                              function cancleedu() { document.getElementById("edu-detail").style.display = "none"; }
+
+                              $('.select-link').click(function () {
+                                id = $(this).attr('data-id');
+                                d = "fd" + id.charAt(2) + id.charAt(3) + id.charAt(4) + id.charAt(5);
+
+                                document.getElementById(id).style.display = "none";
+                                document.getElementById(d).style.display = "block";
+
+                              });
+                              function cancleeduupdate() {
+                                document.getElementById(id).style.display = "block";
+                                document.getElementById(d).style.display = "none";
+
+                              }
+                            </script>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!--Education end-->
+                    </div>
+                  </div>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div />
+            <!--################################################################################################-->
+            <div class="col-md-12">
+              <!--SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
+              <div class="container sidebar">
+                <!--############################################################################################################################################-->
+                <div class="">
+                  <div class="row ">
+                    <div class="">
+                      <div class="container col-sm-12">
+                        <div class="row">
+                          <!--****************************************************************************************************************************************-->
+                          <div class="main-title col-md-9"><h5>Reviews</h5></div>
+                          <div style="margin-top:30px" class="col-sm-3">
+                            <a onclick="" style="margin-left:25% " href="#edu-detail">
+                              <img src="~/images/plus.png" alt="image">
+                            </a>
+                            <a id="add" style="font-size:15px" name="add">Add Review</a>
+                          </div>
+                        </div>
+                        <!--#################################################################################################################################################-->
+                        <br />
+                        <br />
+
+                        <!--***************************************************************************************************************************************************************-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--###########################################################################################################################################################-->
+                <div>
+                  <br />
+                  <br />
+                  <div class="">
+                    <div class="row">
+
+                      <div class="col-sm-12">
+
+                        <div class="sidebar">
+
+                          <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                          @Html.Partial("star1");
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <div />
+
+              <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+              <!--##############################################################################################################################################-->
+              <!--**********************************************************************************************************************************************-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+@section additionalStyles{
   <!-- Style Sheet -->
   <link rel="stylesheet" href="~/Content/userprofile.css">
-  <link rel="stylesheet" href="~/Content/owl.carousel.css">
-  <link rel="stylesheet" href="~/Content/main-style.css">
-    style{
-    
+}
 
-    .rating {
-    float:left;
-    width:300px;
-    }
-    .rating span { float:right; position:relative; }
-    .rating span input {
-    position:absolute;
-    top:0px;
-    left:0px;
-    opacity:0;
-    }
-    .rating span label {
-    display:inline-block;
-    width:30px;
-    height:30px;
-    text-align:center;
-    color:#FFF;
-    background:#ccc;
-    font-size:30px;
-    margin-right:2px;
-    line-height:30px;
-    border-radius:50%;
-    -webkit-border-radius:50%;
-    }
-    .rating span:hover ~ span label,
-    .rating span:hover label,
-    .rating span.checked label,
-    .rating span.checked ~ span label {
-    background:#F90;
-    color:#FFF;
-    }
+@section additionalScripts{
+  <script>
+    $(document).ready(function () {
+      //  Check Radio-box
+      $(".rating input:radio").attr("checked", false);
+      $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+      });
 
-    }
-    <script>
-        $(document).ready(function () {
-            //  Check Radio-box
-            $(".rating input:radio").attr("checked", false);
-            $('.rating input').click(function () {
-                $(".rating span").removeClass('checked');
-                $(this).parent().addClass('checked');
-            });
-
-            $('input:radio').change(
-            function () {
-                var userRating = this.value;
-                alert(userRating);
-            });
-        });
-    </script>
-  <script src="~/Scripts/jquery.min.1.11.1.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="~/Content/style.css">
-  <link rel="stylesheet" type="text/css" href="~/Content/navbar.css">
-  <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+      $('input:radio').change(
+      function () {
+        var userRating = this.value;
+        alert(userRating);
+      });
+    });
+  </script>
 
   <script language="javascript" type="text/javascript">
     function AddSkill() {
       document.getElementById("skilldropdown").disabled = false;
-
     }
     function EditSkill() {
-
       document.getElementById("removeskillicon").style.visibility = "visible";
       document.getElementById("removeskillicon1").style.visibility = "visible";
       document.getElementById("removeskillicon2").style.visibility = "visible";
       document.getElementById("removeskillicon3").style.visibility = "visible";
     }
-    $(document).ready(function () {
-      //for search button redirection
+  </script>
 
-      $('#search-button').click(function () {
 
-        location.href = "/Home/companylist";
+  <script type="text/jscript">
+    function logout() {
+      alert("logout");
+      document.getElementById("logoutform").submit();
+    }
+    $('#sskill').keypress(function () {
+      var url = "/User/GetCompanies";
+      var name = $('#sskill').val();
+
+      $.get(url, { input: name }, function (data) {
+
+        var field = data;
+        var sk = field.split(",");
+        if (sk[0] != null) {
+          $("#td1").html(sk[0]);
+        }
+        if (sk[1] != null) {
+          $("#td2").html(sk[1]);
+        }
+        if (sk[2] != null) {
+          $("#td3").html(sk[2]);
+        }
+        if (sk[3] != null) {
+          $("#td4").html(sk[3]);
+        }
+        if (sk[4] != null) {
+          $("#td5").html(sk[4]);
+        }
+
+        //var vs = sk.join('<br>');
+        //for (i = 0 ; i < sk.length; i++)
+        //{
+        //   $('#pss').html(vs);
+
+        //}
 
       });
     });
   </script>
-</head>
-
-<body>
-  <div class="toolbar navbar navbar-inverse navbar-fixed-top opaque-navbar opaque">
-    <div class="uou-block-1a blog">
-      <div class="container" style="padding-top: 5px">
-        <div class="logo" style="float:left">
-          <div class="navbar-header">
-            <a class="navbar-brand navbar-a-color" href="/Home/Index_l" style="font-size: 38px;padding-left:0px;color:#ffffff;">Hunt Smart</a>
-          </div>
-        </div>
-        <form class="navbar-form navbar-left" id="search-field" role="search" action="/Home/companylist" style="height:33px;width:561px;padding-left:30px;">
-          <div class="input-group stylish-input-group" style="height:33px;outline:aliceblue;">
-            <input type="text" class="form-control" style="height:33px;width:450px;color:#545454;" placeholder="Search">
-            <span class="input-group-addon">
-              <button title="Advanced Search">
-                <span class="glyphicon glyphicon-cog"></span>
-              </button>
-              <button type="submit" title="Search">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </span>
-          </div>
-        </form>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
-              <img src="~/Images/avatar-2.jpg" class="img-circle special-img">
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="navbar-login">
-
-                  <p class="text-center">
-                    <img src="~/Images/avatar-2.jpg" style="height:90px">
-                  </p>
-
-                    <div class="row">
-                        @{
-                            if (Session["l_fname"].ToString() != null)
-                            {
-                                <div>
-                                    <p class="text-center col-sm-2"><strong>@Session["l_fname"].ToString()</strong></p>
-                                </div>
-                            }
-                        }
-
-
-                        @{
-                            if (Session["l_lname"].ToString() != null)
-                            {
-                                <div>
-                                    <p class="text-center col-sm-2"><strong>@Session["l_lname"].ToString()</strong></p>
-                                </div>
-                            }
-                        }
-                    </div>
-
-                
-                  <p class="text-left">
-                    <a href="/User/userProfile" class="btn btn-primary btn-block btn-sm" style="background-color:#2dabff">Profile</a>
-                  </p>
-                </div>
-              </li>
-              <li class="divider navbar-login-session-bg"></li>
-              <li><a href="/Home/userDashboard">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
-              <li class="divider"></li>
-              <li><a href="/Home/index">Log Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-    <div id="main-wrapper">
-        <div class="compny-profile">
-            <!-- SUB Banner -->
-            <div class="profile-bnr user-profile-bnr">
-                <div class="container">
-                    <div class="pull-left">
-                        <h2>Wasim Anwar</h2>
-                        <h5>Senior Software Engineer</h5>
-                    </div>
-                    <!-- Top Riht Button -->
-                    <div class="right-top-bnr">
-                        <div class="sidebar">
-                            <h2 class="main-title">Social Profiles</h2>
-                            <ul class="socil">
-                                <li><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#."><i class="fa fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Profile Company Content -->
-            <div class="profile-company-content user-profile main-user" data-bg-color="f5f5f5">
-                <div class="container">
-                    <div class="row">
-                        <!-- Nav Tabs -->
-                        <div class="col-md-12">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" onclick="location.href = '/User/userProfile'">Profile</a></li>
-                                <li><a data-toggle="tab" onclick="location.href = '/User/experience'">Experience</a></li>
-                                <li><a data-toggle="tab" onclick="location.href = '/User/userDashboard'">Dashboard</a></li>
-                            </ul>
-                        </div>
-                        <!-- Tab Content -->
-                        <div class="col-md-12">
-                            <!--SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
-                            <div class="container sidebar">
-                                <!--############################################################################################################################################-->
-                                <div class="">
-                                    <div class="row ">
-                                        <div class="">
-                                            <div class="container col-sm-12">
-                                                <div class="row">
-                                                    <!--****************************************************************************************************************************************-->
-                                                    <div class="main-title col-md-9"><h5>Experience</h5></div>
-                                                    <div style="margin-top:30px" class="col-sm-3">
-                                                        <a onclick="javascript: addeducation()" style="margin-left:25% " href="#edu-detail">
-                                                            <img src="~/images/plus.png" alt="image">
-                                                        </a>
-                                                        <a id="add" style="font-size:15px" name="add" onclick="javascript: addeducation()">Add Experience</a>
-                                                    </div>
-                                                </div>
-                                                <!--#################################################################################################################################################-->
-                                                <br />
-                                                <br />
-                                                <div style="display:none" id="edu-detail">
-                                                    <div style="background-color:ghostwhite">
-                                                        <div style="margin-top:30px" class="col-md-12">
-                                                            <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-                                                            <form method="post" action="PostUserExperience" id="eduform">
-                                                                <div style="background-color:ghostwhite" class="sidebar">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <h5 class="main-title">Experience Details</h5>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div>
-                                                                        <div class="">
-
-                                                                            <script>
- function selectskill(row) {
-                                                             var x = row.cells;
-                                                             document.getElementById("sskill").value = x[0].innerHTML;
-                                                         }
-                                                                            </script>
-                                                                            <div class="">
-
-                                                                                @{if (Session["lemail"] != null)
-                                                                                    {
-                                                                                        <input style="visibility:hidden; margin-top:-20px" type="text" id="loginemail" name="loginemail" value="@Session["lemail"]" />
-                                                                                    }
-                                                                                }
-                                                                                <div class="form-group row">
-                                                                                    <label id="lbl" class="control-label col-sm-2" for="skill" style="font-size:15px">Search Company</label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <input id="sskill" name="sskill" style="color:black" type="text" class="form-control w3-right" placeholder="Search Company">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div id="dss" style="margin-left:180px; width:700px; height:auto; background-color:ghostwhite; cursor:pointer">
-                                                                                    <p style="font-size:15px;color:blue" id="pss">
-                                                                                        <table style="color:blue; font-size:15px">
-                                                                                            <tr id="tr1" onclick="selectskill(this)"><td id="td1"></td></tr>
-                                                                                            <tr id="tr2" onclick="selectskill(this)"><td id="td2"></td></tr>
-                                                                                            <tr id="tr3" onclick="selectskill(this)"><td id="td3"></td></tr>
-                                                                                            <tr id="tr4" onclick="selectskill(this)"><td id="td4"></td></tr>
-                                                                                            <tr id="tr5" onclick="selectskill(this)"><td id="td5"></td></tr>
-                                                                                        </table>
-                                                                                </div>
-
-
-                                                                            </div>
-
-                                                                            <div class="form-group row">
-                                                                                <label id="lbl" class="control-label col-sm-2" for="degree" style="font-size:15px">Designation:</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <input id="degree" name="degree" type="text" class="form-control w3-right" placeholder="Designatiom">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="form-group row">
-                                                                                <label id="lbl" class="control-label col-sm-2" for="edu-st-dt" style="font-size:15px">Start Date:</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <input id="edu-st-dt" name="edu-st-dt" type="date" class="form-control w3-right" placeholder="Enter School Start date attended">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="form-group row">
-                                                                                <label id="lbl" class="control-label col-sm-2" for="edu-end-dt" style="font-size:15px">End Date:</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <input id="edu-end-dt" name="edu-end-dt" type="date" class="form-control w3-right" placeholder="Enter School End date attended">
-                                                                                </div>
-                                                                            </div>
-
-                                                                           
-
-                                                                            <br />
-                                                                            <br />
-                                                                            <div class="row">
-                                                                                <div class="col-sm-2"><p></p></div>
-                                                                                <div class="col-sm-9">
-                                                                                    <button style="background-color:dodgerblue" id="addedu" name="addedu" value="save" class="btn btn-default">Add</button>
-                                                                                    <input onclick="javascript: cancleedu()" style="background-color:dodgerblue" class="btn btn-default" type="button" value="Cancle" />
-
-                                                                                </div>
-
-                                                                            </div>
-
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </form>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <!--***************************************************************************************************************************************************************-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--###########################################################################################################################################################-->
-                                <div>
-                                    <br />
-                                    <br />
-                                    <div class="">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-
-                                                <div class="sidebar">
-
-                                                    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-                                                    <div>
-                                                        <div>
-
-                                                            @{
-                                                                <br /><br />
-                                                                for (int i = 0; i < designation.Count(); i++)
-                                                                {
-                                                                    var v = exstart.ElementAt(i) + "  " + " _ " + "  " + exend.ElementAt(i);
-                                                                    var vid = "ed" + exid.ElementAt(i);
-                                                                    var fid = "fd" + exid.ElementAt(i);
-
-
-
-                                                                    <div id="@(vid)" data-id="@(vid)" style="background-color:ghostwhite" class="sidebar-information sidebar select-link">
-
-                                                                        <br />
-
-                                                                        <div class="row">
-                                                                            <div class="col-md-11"> </div>
-                                                                            <div class="col-sm-1">
-                                                                                <a id="editprofileicon" href="#"><img src="~/images/edit-pencil2.png" /></a>
-                                                                                <a style="font-size:15px" id="editprofile" href="#pdate">Edit</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <br />
-
-                                                                        <p id="pdegree" style="font-size:15px;font-weight:bold">@designation.ElementAt(i)</p>
-                                                                        <p id="pinstitute" style="font-size:15px; font-style:italic; font-weight:500">@company.ElementAt(i)</p>
-                                                                        <p id="pdate" style="font-size:15px">@v</p>
-                                                                        <p style="visibility:hidden" id="pid">@exid.ElementAt(i)</p>
-
-                                                                    </div>
-
-                                                                        <div id="@(fid)" data-id="@(fid)" style="background-color:ghostwhite; display:none" class="sidebar-information sidebar select-link1">
-
-                                                                            <form method="post" action="PutEducation" id="fform">
-
-                                                                                <p style="font-weight:bold">Degsignation</p>
-                                                                                <input style="color:black" id="fdegree" name="fdegree" type="text" value="@designation.ElementAt(i)" />
-                                                                                <p style="font-weight:bold">Company</p>
-                                                                                <input style="color:black" id="finstitute" name="finstitute" type="text" value="@company.ElementAt(i)" />
-                                                                                <p style="font-weight:bold">StartDate</p>
-                                                                                <input style="color:black" id="fsdate" name="fsdate" type="date" value="@exstart.ElementAt(i)" />
-                                                                                <p style="font-weight:bold">EndDate</p>
-                                                                                <input style="color:black" id="fedate" name="fedate" type="date" value="@exend.ElementAt(i)" />
-                                                                                <input style="color:black; visibility:hidden" id="fid" name="fid" type="text" value="@exid.ElementAt(i)" />
-
-                                                                                <input type="submit" name="chkbtn" value="update" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
-                                                                                <input type="submit" name="chkbtn" value="delete" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" class="btn btn-default" />
-                                                                                <input type="button" onclick="javascript: cancleeduupdate()" style="background-color:dodgerblue;color:white;font-weight:bold ; width:10%" id="cancleedu" name="cancleedu" value="cancle" class="btn btn-default" />
-
-                                                                            </form>
-                                                                        </div>
-
-                                                                }
-
-                                                            }
-
-                                                            <script>
-                                                                    var id;
-                                                                    var d;
-
-                                                                    function addeducation() {
-                                                                        document.getElementById("edu-detail").style.display = "block";
-                                                                    }
-                                                                    function cancleedu() { document.getElementById("edu-detail").style.display = "none"; }
-
-
-
-
-
-                                                                    $('.select-link').click(function () {
-                                                                        id = $(this).attr('data-id');
-                                                                        d = "fd" + id.charAt(2)+id.charAt(3)+id.charAt(4)+id.charAt(5);
-
-
-                                                                        document.getElementById(id).style.display = "none";
-                                                                        document.getElementById(d).style.display = "block";
-
-
-                                                                    });
-                                                                    function cancleeduupdate() {
-                                                                        document.getElementById(id).style.display = "block";
-                                                                        document.getElementById(d).style.display = "none";
-
-                                                                    }
-
-                                                            </script>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <!--Education end-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div />
-                            <!--##############################################################################################################################################-->
-                            <!--**********************************************************************************************************************************************-->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--SsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssS-->
-    </div>
-
-                <!-------------------------------------------------------------------------------------------------------------------------->
-                <br />
-                <div class="container">
-                  <div class="row">
-                    <div class="sidebar">
-                      <div class="row">
-                          <div class="rating">
-                              <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
-                              <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
-                              <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
-                              <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
-                              <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
-                          </div>
-
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="uou-block-4a secondary dark" style="background-color:rgba(127,127,127,0.1);margin-top: 100px">
-    <div class="container">
-      <ul class="links">
-        <li><a href="#">Contact Us</a></li>
-      </ul>
-      <p>Copyright &copy; 2016 <a href="#">TeamCodeJitters</a>. All Rights reserved.</p>
-    </div>
-  </div>
-    <script type="text/jscript">
-              $('#sskill').keypress(function () {
-                  var url = "/User/GetCompanies";
-                  var name = $('#sskill').val();
-
-                  $.get(url, { input: name }, function (data) {
-
-                      var field = data;
-                      var sk = field.split(",");
-                      if (sk[0] != null)
-                          {
-                          $("#td1").html(sk[0]);
-                          }
-                      if (sk[1] != null)
-                      {
-                          $("#td2").html(sk[1]);
-                      }
-                      if (sk[2] != null)
-                      {
-                          $("#td3").html(sk[2]);
-                      }
-                      if (sk[3] != null)
-                      {
-                          $("#td4").html(sk[3]);
-                      }
-                      if (sk[4] != null)
-                      {
-                          $("#td5").html(sk[4]);
-                      }
-
-
-                      //var vs = sk.join('<br>');
-                      //for (i = 0 ; i < sk.length; i++)
-                      //{
-                       //   $('#pss').html(vs);
-
-
-                      //}
-
-
-
-                  });
-              });
-
-
-    </script>
 
   <!-- Scripts -->
   <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -589,5 +420,4 @@
   <script src="~/Scripts/owl.carousel.min.js"></script>
   <script src="~/Scripts/gmap3.min.js"></script>
   <script src="~/Scripts/scripts.js"></script>
-</body>
-</html>
+}

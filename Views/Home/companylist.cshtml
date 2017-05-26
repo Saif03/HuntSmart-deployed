@@ -57,29 +57,40 @@
             {
               if (c != null)
               {
-          <div class="col-sm-3 adjust-cards">
-            <div class="uou-block-6a">
-              <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
-              <h4><a href="/Home/profile_company"> @c.Company_Name </a> </h4>
-              <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
-                <span>Rating: </span>
-                <span style="margin-left:8px;">
-                  <i class="fa fa-star" style="color:#2DABFF"></i>
-                  <i class="fa fa-star" style="color:#2DABFF"></i>
-                  <i class="fa fa-star" style="color:#2DABFF"></i>
-                  <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
-                  <i class="fa fa-star-o" style="color:#2DABFF"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-              }
-            }
-          }
-          else
-          {
-          <h3>No Results Found!</h3>
-          }
+                <div class="col-sm-3 adjust-cards">
+                  <div class="uou-block-6a">
+                    @if (c.Company_Logo != null && c.Company_Logo != "")
+                    {
+                      <img src=@Url.Content(c.Company_Logo) height="100" width="150" alt="">
+
+                    }
+                    else
+                    {
+                      <img src=""~/images/member-3.png height="100" width="150" alt="">
+                    }
+                    @{
+                      string comp_path = "/Home/profile_company/" + c.Company_Id;
+                      <h4><a href=@comp_path> @c.Company_Name </a> </h4>
+                    }
+                    <div style="margin:10px 0;font-size:12px;line-height:24px;display:flex;justify-content:center">
+                      <span>Rating: </span>
+                      <span style="margin-left:8px;">
+                        <i class="fa fa-star" style="color:#2DABFF"></i>
+                        <i class="fa fa-star" style="color:#2DABFF"></i>
+                        <i class="fa fa-star" style="color:#2DABFF"></i>
+                        <i class="fa fa-star-half-o" style="color:#2DABFF"></i>
+                        <i class="fa fa-star-o" style="color:#2DABFF"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                          }
+                        }
+                      }
+                      else
+                      {
+                        <h3>No Results Found!</h3>
+                      }
         }
       </div>
     </div>
